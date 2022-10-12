@@ -1,0 +1,18 @@
+{
+  "name": "node-pupcheck",
+  "version": "0.1.0",
+  "description": "E2E test scripting through puppeteer",
+  "main": "index.js",
+  "repository": "github:saltcorn/node-pupcheck",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Tom Nielsen",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^18.2.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}

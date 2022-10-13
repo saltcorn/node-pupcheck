@@ -10,6 +10,10 @@ const run = require("./run");
             url: "https://saltcorn.com"
         },
         {
+            type: "status",
+            code: 200
+        },
+        {
             type: "contains",
             text: "Focus on database-backed"
         },

@@ -16,6 +16,10 @@ module.exports = async (spec, options) => {
         async containsnot({ text }) {
             if ((await b.content()).includes(text))
                 throw new Error("containsnot found:" + text)
+        },
+        async status({ code }) {
+            if (code !== b.status)
+                throw new Error(`Expected status ${code}, got ${b.status}`)
         }
 
     }

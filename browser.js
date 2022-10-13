@@ -20,7 +20,7 @@ class Browser {
                 height: 800,
             },
         });
-
+        console.log("HAVE BROWSER");
         b.page = await b.browser.newPage();
         //  await page.goto("http://localhost:3000/");
         b.page.on("pageerror", function (err) {
@@ -40,6 +40,7 @@ class Browser {
     }
 
     async goto(url) {
+        console.log("GOTO", url);
         const [response] = await Promise.all([
             this.page.waitForNavigation(),
             this.page.goto(this.baseURL + url),

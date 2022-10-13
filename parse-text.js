@@ -1,7 +1,7 @@
 module.exports = (s) => {
     const lines = s.split(/\r?\n/).map(l => l.trim())
     const items = []
-    const lineNumber = 1
+    let lineNumber = 0
     for (const line of lines) {
         lineNumber++;
         if (!line) continue;
@@ -14,7 +14,7 @@ module.exports = (s) => {
                 break;
             case "status":
                 if (isNaN(+restArgs))
-                    throw new Error(`Parse error in line ${lineNumber}: status not follower by a number`)
+                    throw new Error(`Parse error in line ${lineNumber}: status not followed by a number`)
                 items.push({ type: "status", code: +restArgs })
                 break;
             default:

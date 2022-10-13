@@ -2,9 +2,10 @@ const puppeteer = require("puppeteer");
 const fs = require("fs");
 
 class Browser {
-    static async init(o) {
+    //nonstandard constructor bec it is async
+    static async create(o) {
         const b = new Browser();
-        const executablePath = process.env.PUPPETEER_CHROMIUM_BIN || (fs.existsSync("/usr/bin/chromium-browser")
+        const executablePath = o?.executablePath || process.env.PUPPETEER_CHROMIUM_BIN || (fs.existsSync("/usr/bin/chromium-browser")
             ? "/usr/bin/chromium-browser"
             : fs.existsSync("/usr/bin/chromium")
                 ? "/usr/bin/chromium"
@@ -33,12 +34,10 @@ class Browser {
         b.page.on("dialog", async (dialog) => {
             await dialog.accept();
         });
+        b.baseURL = o?.baseURL
         return b;
     }
 
-    get baseURL() {
-        return `http://${this.tenant ? this.tenant + "." : ""}example.com:2987`;
-    }
     async goto(url) {
         const [response] = await Promise.all([
             this.page.waitForNavigation(),
@@ -63,10 +62,6 @@ class Browser {
     }
     content() {
         return this.page.content();
-    }
-    async delete_tenant(nm) {
-        this.tenant = undefined;
-        await deleteTenant(nm);
     }
 
     // https://stackoverflow.com/a/52633235
@@ -106,5 +101,15 @@ class Browser {
     async close() {
         await this.browser.close();
     }
+
+
 }
-module.exports = Browser
+
+const go = async () => {
+    const b = await Browser.create({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' })
+    await b.goto("https://saltcorn.com")
+    await b.close()
+
+}
+
+go()

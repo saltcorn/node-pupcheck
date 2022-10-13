@@ -9,7 +9,16 @@ const go = async () => {
         {
             type: "goto",
             url: "https://saltcorn.com"
+        },
+        {
+            type: "contains",
+            text: "Focus on database-backed"
+        },
+        {
+            type: "containsnot",
+            text: "Focus on datbase-backed"
         }
+
     ], { executablePath })
 }
 

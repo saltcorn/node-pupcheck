@@ -8,6 +8,14 @@ module.exports = async (spec, options) => {
         await ({
             async goto({ url }) {
                 await b.goto(url)
+            },
+            async contains({ text }) {
+                if (!(await b.content()).includes(text))
+                    throw new Error("contains not found:" + text)
+            },
+            async containsnot({ text }) {
+                if ((await b.content()).includes(text))
+                    throw new Error("containsnot found:" + text)
             }
 
         })[item.type](item)

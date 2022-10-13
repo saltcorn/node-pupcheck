@@ -7,7 +7,7 @@ module.exports = (s) => {
         if (!line) continue;
         var firstSpace = line.indexOf(' ');
         const keyword = line.slice(0, firstSpace)
-        const restArgs = line.slice(i + 1)
+        const restArgs = line.slice(firstSpace + 1)
         switch (keyword.toLowerCase()) {
             case "goto":
                 items.push({ type: "goto", url: restArgs })

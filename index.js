@@ -1,10 +1,9 @@
-const Browser = require("./browser")
-const run = require("./run")
-const go = async () => {
-    const executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+const run = require("./run");
 
-    //const b = await Browser.create({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' })
+(async () => {
+    const executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
     //const executablePath = '/Applications/Chromium.app/Contents/MacOS/Chromium' 
+
     await run([
         {
             type: "goto",
@@ -20,6 +19,4 @@ const go = async () => {
         }
 
     ], { executablePath })
-}
-
-go()
+})()

@@ -1,5 +1,9 @@
 const Browser = require("./browser");
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 module.exports = async (spec, options) => {
   if (!Array.isArray(spec))
     throw new Error("pupcheck spec must be an array, got type: " + typeof spec);
@@ -8,6 +12,15 @@ module.exports = async (spec, options) => {
   const dispatch = {
     async goto({ url }) {
       await b.goto(url);
+    },
+    async click({ selector }) {
+      await b.clickNav(selector);
+    },
+    async sleep({ ms }) {
+      await sleep(ms);
+    },
+    async type({ selector, text }) {
+      await b.page.type(selector, text);
     },
     async contains({ text }) {
       if (!(await b.content()).includes(text))

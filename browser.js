@@ -63,6 +63,10 @@ class Browser {
     return this.page.content();
   }
 
+  async type(sel, s) {
+    await this.page.type("#inputemail", "admin@foo.com");
+  }
+
   // https://stackoverflow.com/a/52633235
   async erase_input(selector, nchars) {
     await this.page.click(selector);

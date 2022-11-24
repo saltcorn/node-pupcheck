@@ -20,12 +20,32 @@ module.exports = (s) => {
       case "containsnot":
         items.push({ type: "containsnot", text: restArgs });
         break;
+      case "type":
+        items.push({
+          type: "type",
+          selector: restArgs.split(" ")[0],
+          text: restArgs.split(" ").slice(1),
+        });
+        break;
+      case "click":
+        items.push({
+          type: "click",
+          selector: restArgs,
+        });
+        break;
       case "status":
         if (isNaN(+restArgs))
           throw new Error(
             `Parse error in line ${lineNumber}: status not followed by a number`
           );
         items.push({ type: "status", code: +restArgs });
+        break;
+      case "sleep":
+        if (isNaN(+restArgs))
+          throw new Error(
+            `Parse error in line ${lineNumber}: sleep not followed by a number`
+          );
+        items.push({ type: "sleep", ms: +restArgs });
         break;
       default:
         throw new Error(

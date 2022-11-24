@@ -1,5 +1,5 @@
 {
-  "name": "node-pupcheck",
+  "name": "pupcheck",
   "version": "0.1.0",
   "description": "E2E test scripting through puppeteer",
   "main": "index.js",
@@ -14,6 +14,9 @@
   },
   "devDependencies": {
     "jest": "^27.1.0"
+  },
+  "bin": {
+    "pupcheck": "./index.js"
   },
   "jest": {
     "testEnvironment": "node"

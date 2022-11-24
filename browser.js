@@ -12,6 +12,10 @@ class Browser {
         ? "/usr/bin/chromium-browser"
         : fs.existsSync("/usr/bin/chromium")
         ? "/usr/bin/chromium"
+        : fs.existsSync(
+            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+          )
+        ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
         : undefined);
     b.browser = await puppeteer.launch({
       headless: true, //o || process.env.CI==='true',

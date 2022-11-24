@@ -18,7 +18,7 @@ class Browser {
         ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
         : undefined);
     b.browser = await puppeteer.launch({
-      headless: true, //o || process.env.CI==='true',
+      headless: !o?.headful, //o || process.env.CI==='true',
       executablePath,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       dumpio: true,

@@ -5,6 +5,8 @@ module.exports = (s) => {
   for (const line of lines) {
     lineNumber++;
     if (!line) continue;
+    if (line[0] === "#") continue;
+
     var firstSpace = line.indexOf(" ");
     const keyword = line.slice(0, firstSpace);
     const restArgs = line.slice(firstSpace + 1);

@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const run = require("./run");
 const path = require("path");
 const parse = require("./parse-text");

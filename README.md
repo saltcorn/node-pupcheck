@@ -27,6 +27,8 @@ Chrome or chromium need to be installed and accessible. If this is in a non-stan
 The pupcheck file consists of a number of one-word commands, followed by the arguments to that command.
 If the command takes a free text argument, this will be the last argument and will consist of the rest of the line.
 
+The command is case insensitive, so you can use camelCase.
+
 `# This is a comment but only if # is first character`
 
 Permitted commands:
@@ -34,36 +36,43 @@ Permitted commands:
 - `goto {url}`
 
   Navigate to this URL
+
   Example: `goto https://google.com`
 
 - `status {status code}`
 
   Assert this status code
+
   Example: `status 200`
 
 - `contains {contents}`
 
   Assert this is in the page contents
+
   Example: `contains Tasks completed`
 
 - `containsnot {contents}`
 
   Assert this is in not in the page contents
-  Example: `contains An error occurred`
+
+  Example: `containsNot An error occurred`
 
 - `click {selector}`
 
   Click the selected element and wait for navigation to complete
+
   Example: `click button#click_me`
 
 - `type {selector} {text}`
 
   Type the text into the selected input element
+
   Example: `type input#full_name John Smith`
 
 - `sleep {milliseconds}`
 
   Sleep for this many milliseconds
+
   Example: `sleep 1000`
 
 #### Example pupcheck file

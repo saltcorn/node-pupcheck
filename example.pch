@@ -1,4 +1,4 @@
 goto https://saltcorn.com
 status 200
 contains platform for building database
-contains platform for building databse
+containsnot platform for building databse

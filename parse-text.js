@@ -14,6 +14,12 @@ module.exports = (s) => {
       case "goto":
         items.push({ type: "goto", url: restArgs });
         break;
+      case "contains":
+        items.push({ type: "contains", text: restArgs });
+        break;
+      case "containsnot":
+        items.push({ type: "containsnot", text: restArgs });
+        break;
       case "status":
         if (isNaN(+restArgs))
           throw new Error(
@@ -22,6 +28,9 @@ module.exports = (s) => {
         items.push({ type: "status", code: +restArgs });
         break;
       default:
+        throw new Error(
+          `Parse error in line ${lineNumber}: unknown command '${keyword}'`
+        );
         break;
     }
   }

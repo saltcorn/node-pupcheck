@@ -2,9 +2,10 @@ const run = require("./run");
 const path = require("path");
 const parse = require("./parse-text");
 const { readFileSync } = require("fs");
+
 const getArgs = () => {
   const myArgs = process.argv.slice(2);
-  const flags = { headful: false };
+  const flags = {};
   const files = [];
 
   let flagsDone = false;
@@ -17,13 +18,15 @@ const getArgs = () => {
         case "-H":
           flags.headful = true;
           break;
+        case "-v":
+          flags.verbose = true;
+          break;
         case "-h":
         case "--help":
-          console.log("pupcheck [-H] [file ...]");
+          console.log("pupcheck [-Hv] [file ...]");
           console.log("\nSwitches:\n");
-          console.log(
-            "   -H  : Headful, opposite of headless; open browser window"
-          );
+          console.log("   -H  : Headful; open browser window");
+          console.log("   -v  : verbose");
           console.log("");
           process.exit(0);
         default:
@@ -57,6 +60,7 @@ const runFile = async (fnm, options) => {
   }
   if (spec) {
     process.stdout.write(fnm + ": ");
+    if (options.verbose) console.log(JSON.stringify(spec, null, 2));
     await run(spec, options);
   }
 };
@@ -65,6 +69,7 @@ const runFile = async (fnm, options) => {
   const { flags, files } = getArgs();
   const options = {
     headful: flags.headful,
+    verbose: flags.verbose,
   };
   for (const file of files) {
     await runFile(file, options);

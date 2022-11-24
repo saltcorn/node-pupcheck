@@ -21,4 +21,16 @@ describe("text parser", () => {
       { type: "status", code: 200 },
     ]);
   });
+  it("parse file with comments", async () => {
+    expect(
+      parse(`
+          goto https://saltcorn.com
+          # this is a comment
+          status 200        
+        `)
+    ).toStrictEqual([
+      { type: "goto", url: "https://saltcorn.com" },
+      { type: "status", code: 200 },
+    ]);
+  });
 });

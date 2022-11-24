@@ -1,8 +1,15 @@
 # Pupcheck
 
-Simple file format for puppeteer-based End-to-end tests
+Simple file format for puppeteer-based End-to-end tests:
 
-### Command line tool
+```
+goto https://saltcorn.com
+status 200
+contains platform for building database
+containsnot platform for building databse
+```
+
+## Command line tool
 
 run with
 
@@ -22,7 +29,7 @@ Command line switches:
 Chrome or chromium need to be installed and accessible. If this is in a non-standard location, set the
 `PUPPETEER_CHROMIUM_BIN` environment variable.
 
-### pupcheck file (\*.pch) commands
+## pupcheck file commands
 
 The pupcheck file consists of a number of one-word commands, followed by the arguments to that command.
 If the command takes a free text argument, this will be the last argument and will consist of the rest of the line.
@@ -31,7 +38,7 @@ The command is case insensitive, so you can use camelCase.
 
 `# This is a comment but only if # is first character`
 
-Permitted commands:
+### Permitted commands
 
 - `goto {url}`
 
@@ -75,7 +82,7 @@ Permitted commands:
 
   Example: `sleep 1000`
 
-#### Example pupcheck file
+### Example pupcheck file
 
 `example.pch` contents:
 
@@ -90,3 +97,7 @@ click input[type=submit]
 # Check dashboard loads
 contains Tasks completed
 ```
+
+How to run:
+
+`npx pupcheck example.pch`

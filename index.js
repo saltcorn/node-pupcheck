@@ -90,16 +90,13 @@ const runFile = async (fnm, options) => {
   const fileContents = readFileSync(fnm).toString();
 
   switch (ext) {
-    case ".pch":
-      spec = parse(fileContents);
-
-      break;
     case ".json":
       spec = JSON.parse(fileContents);
       break;
 
     default:
-      console.error("Skipping unknown file type:", fnm);
+      spec = parse(fileContents);
+
       break;
   }
   if (spec) {

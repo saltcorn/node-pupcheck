@@ -1,6 +1,6 @@
 {
   "name": "pupcheck",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "E2E test scripting through puppeteer",
   "main": "index.js",
   "repository": "github:saltcorn/node-pupcheck",

@@ -76,9 +76,9 @@ The command is case insensitive, so you can use camelCase.
 
 - `type {selector} {text}`
 
-  Type the text into the selected input element
+  Type the text into the selected input element. If your selector has a space due to choosing a child element, wrap in parentheses.
 
-  Example: `type input#full_name John Smith`
+  Examples: `type input#full_name John Smith`, `type (#question-name input) Walt Whitman`
 
 - `sleep {milliseconds}`
 

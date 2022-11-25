@@ -1,3 +1,14 @@
+const selectorAndRest = (restArgs) => {
+  if (!restArgs) return ["", ""];
+  if (restArgs[0] === "(") {
+    var closesAt = restArgs.indexOf(")");
+    return [restArgs.slice(1, closesAt), restArgs.slice(closesAt + 1).trim()];
+  } else {
+    const sp = restArgs.split(" ");
+    return [sp[0], sp.slice(1).join(" ")];
+  }
+};
+
 module.exports = (s) => {
   const lines = s.split(/\r?\n/).map((l) => l.trim());
   const items = [];
@@ -21,10 +32,11 @@ module.exports = (s) => {
         items.push({ type: "containsnot", text: restArgs });
         break;
       case "type":
+        const [selector, text] = selectorAndRest(restArgs);
         items.push({
           type: "type",
-          selector: restArgs.split(" ")[0],
-          text: restArgs.split(" ").slice(1),
+          selector,
+          text,
         });
         break;
       case "click":

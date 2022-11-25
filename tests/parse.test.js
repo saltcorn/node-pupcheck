@@ -33,4 +33,24 @@ describe("text parser", () => {
       { type: "status", code: 200 },
     ]);
   });
+  it("parse click", async () => {
+    expect(parse(`click #foo`)).toStrictEqual([
+      { type: "click", selector: "#foo" },
+    ]);
+  });
+  it("parse click with child elem", async () => {
+    expect(parse(`click #foo a`)).toStrictEqual([
+      { type: "click", selector: "#foo a" },
+    ]);
+  });
+  it("parse simple type", async () => {
+    expect(parse(`type #foo bar baz`)).toStrictEqual([
+      { type: "type", selector: "#foo", text: "bar baz" },
+    ]);
+  });
+  it("parse type with child elem", async () => {
+    expect(parse(`type (#foo input) bar baz`)).toStrictEqual([
+      { type: "type", selector: "#foo input", text: "bar baz" },
+    ]);
+  });
 });

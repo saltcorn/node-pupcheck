@@ -42,6 +42,8 @@ The command is case insensitive, so you can use camelCase.
 
 `# This is a comment but only if # is first character`
 
+If your selector has a space due to choosing a child element, wrap in parentheses.
+
 ### Permitted commands
 
 - `goto {url}`
@@ -76,9 +78,15 @@ The command is case insensitive, so you can use camelCase.
 
 - `type {selector} {text}`
 
-  Type the text into the selected input element. If your selector has a space due to choosing a child element, wrap in parentheses.
+  Type the text into the selected input element.
 
   Examples: `type input#full_name John Smith`, `type (#question-name input) Walt Whitman`
+
+- `erase {selector} {nchars}`
+
+  Erase characters from the selected input element.
+
+  Examples: `erase input#full_name 9`
 
 - `sleep {milliseconds}`
 

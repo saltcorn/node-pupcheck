@@ -38,8 +38,8 @@ describe("text parser", () => {
       { type: "click", selector: "#foo" },
     ]);
   });
-  it("parse click with child elem", async () => {
-    expect(parse(`click #foo a`)).toStrictEqual([
+  it("parse click with parens", async () => {
+    expect(parse(`click (#foo a)`)).toStrictEqual([
       { type: "click", selector: "#foo a" },
     ]);
   });

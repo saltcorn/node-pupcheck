@@ -56,10 +56,13 @@ module.exports = (s) => {
         }
         break;
       case "click":
-        items.push({
-          type: "click",
-          selector: restArgs,
-        });
+        {
+          const [selector] = selectorAndRest(restArgs);
+          items.push({
+            type: "click",
+            selector,
+          });
+        }
         break;
       case "status":
         if (isNaN(+restArgs))

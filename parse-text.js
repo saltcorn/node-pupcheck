@@ -32,12 +32,28 @@ module.exports = (s) => {
         items.push({ type: "containsnot", text: restArgs });
         break;
       case "type":
-        const [selector, text] = selectorAndRest(restArgs);
-        items.push({
-          type: "type",
-          selector,
-          text,
-        });
+        {
+          const [selector, text] = selectorAndRest(restArgs);
+          items.push({
+            type: "type",
+            selector,
+            text,
+          });
+        }
+        break;
+      case "erase":
+        {
+          const [selector, nchars] = selectorAndRest(restArgs);
+          if (isNaN(+nchars))
+            throw new Error(
+              `Parse error in line ${lineNumber}: erase selector not followed by a number`
+            );
+          items.push({
+            type: "erase",
+            selector,
+            nchars: +nchars,
+          });
+        }
         break;
       case "click":
         items.push({

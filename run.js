@@ -22,6 +22,9 @@ module.exports = async (spec, options) => {
     async type({ selector, text }) {
       await b.page.type(selector, text);
     },
+    async erase({ selector, nchars }) {
+      await b.erase_input(selector, nchars);
+    },
     async contains({ text }) {
       if (!(await b.content()).includes(text))
         throw new Error("contains not found:" + text);

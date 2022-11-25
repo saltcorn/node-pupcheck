@@ -29,6 +29,10 @@ Command line switches:
 Chrome or chromium need to be installed and accessible. If this is in a non-standard location, set the
 `PUPPETEER_CHROMIUM_BIN` environment variable.
 
+## Upgrade
+
+`npx clear-npx-cache` to delete an old version of pupcheck installed with `npx`, then run `npx pupcheck`0 again.
+
 ## pupcheck file commands
 
 The pupcheck file consists of a number of one-word commands, followed by the arguments to that command.

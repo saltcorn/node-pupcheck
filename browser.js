@@ -57,7 +57,7 @@ class Browser {
       this.page.waitForNavigation(),
       this.page.click(sel),
     ]);
-    this.status = response.status();
+    this.status = response ? response.status() : null;
   }
   content() {
     return this.page.content();

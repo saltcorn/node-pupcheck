@@ -89,6 +89,11 @@ const runFile = async (fnm, options) => {
   let spec;
   const fileContents = readFileSync(fnm).toString();
 
+  if (["md"].includes(ext)) {
+    console.log("Skipping file:", fnm);
+    return;
+  }
+
   switch (ext) {
     case ".json":
       spec = JSON.parse(fileContents);

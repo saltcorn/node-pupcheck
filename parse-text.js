@@ -29,7 +29,13 @@ module.exports = (s) => {
         items.push({ type: "contains", text: restArgs });
         break;
       case "containsnot":
+      case "contains_not":
         items.push({ type: "containsnot", text: restArgs });
+        break;
+
+      case "evaltrue":
+      case "eval_true":
+        items.push({ type: "evaltrue", js: restArgs });
         break;
       case "type":
         {

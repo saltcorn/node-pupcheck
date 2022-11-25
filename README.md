@@ -64,7 +64,7 @@ If your selector has a space due to choosing a child element, wrap in parenthese
 
   Example: `contains Tasks completed`
 
-- `containsnot {contents}`
+- `containsnot {contents}` (also `contains_not`)
 
   Assert this is in not in the page contents
 
@@ -87,6 +87,12 @@ If your selector has a space due to choosing a child element, wrap in parenthese
   Erase characters from the selected input element.
 
   Examples: `erase input#full_name 9`
+
+- `evaltrue {js-expr-string}` (also `eval_true`)
+
+  Assert that this expression must evaluate to true
+
+  Examples: `eval_true $("input#full_name").val()==="Miles Davis"`
 
 - `sleep {milliseconds}`
 

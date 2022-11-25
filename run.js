@@ -16,6 +16,10 @@ module.exports = async (spec, options) => {
     async click({ selector }) {
       await b.clickNav(selector);
     },
+    async evaltrue({ js }) {
+      const res = await b.page.evaluate(js);
+      if (!res) throw new Error("evaltrue returned: " + JSON.stringify(res));
+    },
     async sleep({ ms }) {
       await sleep(ms);
     },

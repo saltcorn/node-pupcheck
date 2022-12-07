@@ -47,6 +47,17 @@ module.exports = (s) => {
           });
         }
         break;
+      case "slowly_type":
+      case "slowlytype":
+        {
+          const [selector, text] = selectorAndRest(restArgs);
+          items.push({
+            type: "slowly_type",
+            selector,
+            text,
+          });
+        }
+        break;
       case "erase":
         {
           const [selector, nchars] = selectorAndRest(restArgs);

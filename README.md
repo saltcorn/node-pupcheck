@@ -76,11 +76,23 @@ If your selector has a space due to choosing a child element, wrap in parenthese
 
   Example: `click button#click_me`
 
+- `waitfor {selector}` (also `wait_for`)
+
+  Wait until this element becomes present
+
+  Example: `waitfor button#click_me`
+
 - `type {selector} {text}`
 
   Type the text into the selected input element.
 
   Examples: `type input#full_name John Smith`, `type (#question-name input) Walt Whitman`
+
+- `slowlytype {selector} {text}` (also `slowly_type`)
+
+  Type the text SLOWLY into the selected input element.
+
+  Examples: `slowly_type input#full_name John Smith`, `slowlyType (#question-name input) Walt Whitman`
 
 - `erase {selector} {nchars}`
 

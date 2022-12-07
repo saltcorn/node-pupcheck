@@ -29,6 +29,9 @@ module.exports = async (spec, options) => {
     async type({ selector, text }) {
       await b.page.type(selector, text);
     },
+    async slowly_type({ selector, text }) {
+      await b.slowly_type(selector, text);
+    },
     async erase({ selector, nchars }) {
       await b.erase_input(selector, nchars);
     },

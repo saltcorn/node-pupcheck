@@ -70,6 +70,16 @@ module.exports = (s) => {
           });
         }
         break;
+      case "wait_for":
+      case "waitfor":
+        {
+          const [selector] = selectorAndRest(restArgs);
+          items.push({
+            type: "wait_for",
+            selector,
+          });
+        }
+        break;
       case "status":
         if (isNaN(+restArgs))
           throw new Error(

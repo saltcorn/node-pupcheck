@@ -16,6 +16,9 @@ module.exports = async (spec, options) => {
     async click({ selector }) {
       await b.clickNav(selector);
     },
+    async wait_for({ selector }) {
+      await b.page.waitForSelector(selector);
+    },
     async evaltrue({ js }) {
       const res = await b.page.evaluate(js);
       if (!res) throw new Error("evaltrue returned: " + JSON.stringify(res));

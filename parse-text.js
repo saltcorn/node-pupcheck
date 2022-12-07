@@ -47,6 +47,16 @@ module.exports = (s) => {
           });
         }
         break;
+      case "select":
+        {
+          const [selector, value] = selectorAndRest(restArgs);
+          items.push({
+            type: "select",
+            selector,
+            value,
+          });
+        }
+        break;
       case "slowly_type":
       case "slowlytype":
         {

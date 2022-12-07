@@ -94,6 +94,12 @@ If your selector has a space due to choosing a child element, wrap in parenthese
 
   Examples: `slowly_type input#full_name John Smith`, `slowlyType (#question-name input) Walt Whitman`
 
+- `select {selector} {value}`
+
+  Set the value of a drop-down `<select>` element
+
+  Examples: `select select#role 5`
+
 - `erase {selector} {nchars}`
 
   Erase characters from the selected input element.

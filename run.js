@@ -12,8 +12,9 @@ module.exports = async (spec, options) => {
     async goto({ url }) {
       await b.goto(url);
     },
-    async click({ selector }) {
-      await b.clickNav(selector);
+    async click({ selector, wait_nav }) {
+      if (wait_nav === false) await b.page.click(selector);
+      else await b.clickNav(selector);
     },
     async wait_for({ selector }) {
       await b.page.waitForSelector(selector);

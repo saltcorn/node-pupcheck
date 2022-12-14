@@ -135,14 +135,16 @@ module.exports = (s, fileName) => {
         break;
       case "click":
         {
-          const [selector] = selectorAndRest(restArgs);
-          items.push({
+          const [selector, nav] = selectorAndRest(restArgs);
+          const item = {
             lineNumber,
             fileName,
             line,
             type: "click",
             selector,
-          });
+          };
+          if (nav === "false") item.wait_nav = false;
+          items.push(item);
         }
         break;
       case "wait_for":

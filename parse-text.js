@@ -28,7 +28,7 @@ function findClosingBracketMatchIndex(str, pos) {
         break;
     }
   }
-  return -1; // No matching closing parenthesis
+  throw new Error(`No matching closing parenthesis in selector ${str}`);
 }
 module.exports = (s, fileName) => {
   const lines = s.split(/\r?\n/).map((l) => l.trim());

@@ -1,7 +1,8 @@
 const selectorAndRest = (restArgs) => {
   if (!restArgs) return ["", ""];
   if (restArgs[0] === "(") {
-    var closesAt = restArgs.indexOf(")");
+    // was: var closesAt = restArgs.indexOf(")");
+    let closesAt = findClosingBracketMatchIndex(restArgs, 0);
     return [restArgs.slice(1, closesAt), restArgs.slice(closesAt + 1).trim()];
   } else {
     const sp = restArgs.split(" ");
@@ -9,6 +10,26 @@ const selectorAndRest = (restArgs) => {
   }
 };
 
+// https://codereview.stackexchange.com/a/179484
+function findClosingBracketMatchIndex(str, pos) {
+  if (str[pos] != "(") {
+    throw new Error("No '(' at index " + pos);
+  }
+  let depth = 1;
+  for (let i = pos + 1; i < str.length; i++) {
+    switch (str[i]) {
+      case "(":
+        depth++;
+        break;
+      case ")":
+        if (--depth == 0) {
+          return i;
+        }
+        break;
+    }
+  }
+  return -1; // No matching closing parenthesis
+}
 module.exports = (s, fileName) => {
   const lines = s.split(/\r?\n/).map((l) => l.trim());
   const items = [];

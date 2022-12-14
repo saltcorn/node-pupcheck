@@ -8,7 +8,6 @@ module.exports = async (spec, options) => {
   if (!Array.isArray(spec))
     throw new Error("pupcheck spec must be an array, got type: " + typeof spec);
   const b = await Browser.create(options);
-
   const dispatch = {
     async goto({ url }) {
       await b.goto(url);
@@ -58,8 +57,16 @@ module.exports = async (spec, options) => {
       throw new Error("type not supported " + item.type);
   }
   for (const item of spec) {
-    await dispatch[item.type](item);
+    try {
+      await dispatch[item.type](item);
+    } catch (e) {
+      await b.close();
+      return `${e.name}: ${e.message}
+in ${item.fileName} line ${item.lineNumber}:
+${item.line}`;
+    }
   }
   console.log(`${spec.length} steps passed`);
   await b.close();
+  return;
 };

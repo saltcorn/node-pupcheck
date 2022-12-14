@@ -100,14 +100,18 @@ const runFile = async (fnm, options) => {
       break;
 
     default:
-      spec = parse(fileContents);
+      spec = parse(fileContents, fnm);
 
       break;
   }
   if (spec) {
     process.stdout.write(fnm + ": ");
     if (options.verbose) console.log(JSON.stringify(spec, null, 2));
-    await run(spec, options);
+    const error = await run(spec, options);
+    if (error) {
+      console.error(error);
+      process.exit(1);
+    }
   }
 };
 

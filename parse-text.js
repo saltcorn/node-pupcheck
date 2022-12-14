@@ -9,7 +9,7 @@ const selectorAndRest = (restArgs) => {
   }
 };
 
-module.exports = (s) => {
+module.exports = (s, fileName) => {
   const lines = s.split(/\r?\n/).map((l) => l.trim());
   const items = [];
   let lineNumber = 0;
@@ -23,24 +23,45 @@ module.exports = (s) => {
     const restArgs = line.slice(firstSpace + 1);
     switch (keyword.toLowerCase()) {
       case "goto":
-        items.push({ type: "goto", url: restArgs });
+        items.push({ lineNumber, fileName, line, type: "goto", url: restArgs });
         break;
       case "contains":
-        items.push({ type: "contains", text: restArgs });
+        items.push({
+          lineNumber,
+          fileName,
+          line,
+          type: "contains",
+          text: restArgs,
+        });
         break;
       case "containsnot":
       case "contains_not":
-        items.push({ type: "containsnot", text: restArgs });
+        items.push({
+          lineNumber,
+          fileName,
+          line,
+          type: "containsnot",
+          text: restArgs,
+        });
         break;
 
       case "evaltrue":
       case "eval_true":
-        items.push({ type: "evaltrue", js: restArgs });
+        items.push({
+          lineNumber,
+          fileName,
+          line,
+          type: "evaltrue",
+          js: restArgs,
+        });
         break;
       case "type":
         {
           const [selector, text] = selectorAndRest(restArgs);
           items.push({
+            lineNumber,
+            fileName,
+            line,
             type: "type",
             selector,
             text,
@@ -51,6 +72,9 @@ module.exports = (s) => {
         {
           const [selector, value] = selectorAndRest(restArgs);
           items.push({
+            lineNumber,
+            fileName,
+            line,
             type: "select",
             selector,
             value,
@@ -62,6 +86,9 @@ module.exports = (s) => {
         {
           const [selector, text] = selectorAndRest(restArgs);
           items.push({
+            lineNumber,
+            fileName,
+            line,
             type: "slowly_type",
             selector,
             text,
@@ -76,6 +103,9 @@ module.exports = (s) => {
               `Parse error in line ${lineNumber}: erase selector not followed by a number`
             );
           items.push({
+            lineNumber,
+            fileName,
+            line,
             type: "erase",
             selector,
             nchars: +nchars,
@@ -86,6 +116,9 @@ module.exports = (s) => {
         {
           const [selector] = selectorAndRest(restArgs);
           items.push({
+            lineNumber,
+            fileName,
+            line,
             type: "click",
             selector,
           });
@@ -96,6 +129,9 @@ module.exports = (s) => {
         {
           const [selector] = selectorAndRest(restArgs);
           items.push({
+            lineNumber,
+            fileName,
+            line,
             type: "wait_for",
             selector,
           });
@@ -106,14 +142,26 @@ module.exports = (s) => {
           throw new Error(
             `Parse error in line ${lineNumber}: status not followed by a number`
           );
-        items.push({ type: "status", code: +restArgs });
+        items.push({
+          lineNumber,
+          fileName,
+          line,
+          type: "status",
+          code: +restArgs,
+        });
         break;
       case "sleep":
         if (isNaN(+restArgs))
           throw new Error(
             `Parse error in line ${lineNumber}: sleep not followed by a number`
           );
-        items.push({ type: "sleep", ms: +restArgs });
+        items.push({
+          lineNumber,
+          fileName,
+          line,
+          type: "sleep",
+          ms: +restArgs,
+        });
         break;
       default:
         throw new Error(

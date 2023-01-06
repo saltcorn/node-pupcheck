@@ -29,6 +29,12 @@ Command line switches:
 Chrome or chromium need to be installed and accessible. If this is in a non-standard location, set the
 `PUPPETEER_CHROMIUM_BIN` environment variable.
 
+Set the base URL with the `PUPCHECK_BASE_URL` environment variable. Then you can use a relative URL; for example
+
+```
+goto /
+```
+
 ## Upgrade
 
 `npx clear-npx-cache` to delete an old version of pupcheck installed with `npx`, then run `npx pupcheck`0 again.

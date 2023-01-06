@@ -40,7 +40,7 @@ class Browser {
     b.page.on("dialog", async (dialog) => {
       await dialog.accept();
     });
-    b.baseURL = o?.baseURL || "";
+    b.baseURL = o?.baseURL || process.env.PUPCHECK_BASE_URL || "";
     b.status = null;
     return b;
   }

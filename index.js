@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 
 const run = require("./run");
+const run_pjs = require("./pjs_run");
 const path = require("path");
 const parse = require("./parse-text");
 const { readFileSync } = require("fs");
@@ -73,6 +74,7 @@ const getArgs = () => {
         case "--help":
           console.log(helpText);
           process.exit(0);
+          break;
         default:
           break;
       }
@@ -98,6 +100,9 @@ const runFile = async (fnm, options) => {
     case ".json":
       spec = JSON.parse(fileContents);
       break;
+    case ".pjs":
+      await run_pjs(fnm, options);
+      return;
 
     default:
       spec = parse(fileContents, fnm);

@@ -1,1 +1,5 @@
 await sleep(100)
+await goto("https://saltcorn.com")
+status(200)
+console.log("foo")
+await contains("platform for building database")

@@ -44,7 +44,13 @@ module.exports = (s, fileName) => {
     const restArgs = line.slice(firstSpace + 1);
     switch (keyword.toLowerCase()) {
       case "goto":
-        items.push({ lineNumber, fileName, line, type: "goto", url: restArgs });
+        items.push({
+          lineNumber,
+          fileName,
+          line,
+          type: "goto",
+          args: [restArgs],
+        });
         break;
       case "contains":
         items.push({
@@ -52,7 +58,7 @@ module.exports = (s, fileName) => {
           fileName,
           line,
           type: "contains",
-          text: restArgs,
+          args: [restArgs],
         });
         break;
       case "containsnot":
@@ -62,7 +68,7 @@ module.exports = (s, fileName) => {
           fileName,
           line,
           type: "containsnot",
-          text: restArgs,
+          args: [restArgs],
         });
         break;
 
@@ -73,7 +79,7 @@ module.exports = (s, fileName) => {
           fileName,
           line,
           type: "evaltrue",
-          js: restArgs,
+          args: [restArgs],
         });
         break;
       case "type":
@@ -84,8 +90,7 @@ module.exports = (s, fileName) => {
             fileName,
             line,
             type: "type",
-            selector,
-            text,
+            args: [selector, text],
           });
         }
         break;
@@ -97,8 +102,7 @@ module.exports = (s, fileName) => {
             fileName,
             line,
             type: "select",
-            selector,
-            value,
+            args: [selector, value],
           });
         }
         break;
@@ -111,8 +115,7 @@ module.exports = (s, fileName) => {
             fileName,
             line,
             type: "slowly_type",
-            selector,
-            text,
+            args: [selector, text],
           });
         }
         break;
@@ -128,8 +131,7 @@ module.exports = (s, fileName) => {
             fileName,
             line,
             type: "erase",
-            selector,
-            nchars: +nchars,
+            args: [selector, +nchars],
           });
         }
         break;
@@ -141,9 +143,9 @@ module.exports = (s, fileName) => {
             fileName,
             line,
             type: "click",
-            selector,
+            args: [selector, nav === "false" ? false : undefined],
           };
-          if (nav === "false") item.wait_nav = false;
+
           items.push(item);
         }
         break;
@@ -156,7 +158,7 @@ module.exports = (s, fileName) => {
             fileName,
             line,
             type: "wait_for",
-            selector,
+            args: [selector],
           });
         }
         break;
@@ -170,7 +172,7 @@ module.exports = (s, fileName) => {
           fileName,
           line,
           type: "status",
-          code: +restArgs,
+          args: [+restArgs],
         });
         break;
       case "sleep":
@@ -183,14 +185,13 @@ module.exports = (s, fileName) => {
           fileName,
           line,
           type: "sleep",
-          ms: +restArgs,
+          args: [+restArgs],
         });
         break;
       default:
         throw new Error(
           `Parse error in line ${lineNumber}: unknown command '${keyword}'`
         );
-        break;
     }
   }
   return items;

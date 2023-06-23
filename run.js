@@ -14,7 +14,7 @@ module.exports = async (spec, options) => {
   }
   for (const item of spec) {
     try {
-      await dispatch[item.type](item);
+      await dispatch[item.type](...item.args);
     } catch (e) {
       await b.close();
       return `${e.name}: ${e.message}
